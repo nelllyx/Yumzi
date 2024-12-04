@@ -1,12 +1,9 @@
 package com.semicolon.africa.yumzi.dtos.response;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
-public class RegisterUserResponse {
-    private Long userId;
-    private String message;
+public class UserCanCancelOrderResponse {
 }

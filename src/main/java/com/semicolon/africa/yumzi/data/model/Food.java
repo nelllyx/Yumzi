@@ -1,25 +1,23 @@
 package com.semicolon.africa.yumzi.data.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Setter
 @Getter
 @Entity
-public class CustomerOrder {
+public class Food {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-    private String name;
-    private String address;
-    private String phone;
     private String foodName;
-    private BigDecimal amount;
+    private BigDecimal foodPrice;
+    private String foodDescription;
 }
