@@ -5,10 +5,9 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class UserCanMakeOrderRequest {
+public class AddCartItemRequest {
     private Long userId;
     private String foodName;
-    private String address;
-    private String phone;
+    private String foodType;
     private int quantity;
 }

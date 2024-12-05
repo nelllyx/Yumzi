@@ -5,5 +5,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class UserCanCancelOrderResponse {
+public class AddCartItemsToACustomerCartResponse {
+    private Long id;
+    private String message;
 }

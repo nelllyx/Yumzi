@@ -10,13 +10,13 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Setter
 @Getter
 @Entity
-
 public class CartItem {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-    @ManyToOne
-    private CustomerOrder order;
+    private Long userId;
+    private String foodName;
+    private String foodType;
     private int quantity;
 }
 

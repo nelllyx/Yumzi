@@ -5,7 +5,5 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class UserCanMakeOrderResponse {
-    private Long id;
-    private String message;
+public class RemoveCartItemResponse {
 }

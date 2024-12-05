@@ -17,6 +17,10 @@ public class YumziUsers implements UserService{
     private OrderService orderService;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private CartItemService cartItemService;
+    @Autowired
+    private CartService cartService;
 
     @Override
     public RegisterUserResponse registerUser(RegisterUserRequest register) {
@@ -50,15 +54,38 @@ public class YumziUsers implements UserService{
     }
 
     @Override
-    public UserCanMakeOrderResponse userCanMakeOrder(UserCanMakeOrderRequest makeOrderRequest) {
+    public MakeOrderResponse userCanMakeOrder(MakeOrderRequest makeOrderRequest) {
         User user = userRepository.findUserById(makeOrderRequest.getUserId())
                 .orElseThrow(() -> new UserNotFoundException("User Not Found"));
-//        MakeOrderResponse makeOrderResponse = orderService.makeOrder();
+        return orderService.makeOrder(makeOrderRequest);
+    }
+
+    @Override
+    public CancelOrderResponse cancelOrder(CancelOrderRequest cancelOrderRequest) {
+        User user = userRepository.findUserById(cancelOrderRequest.getUserId())
+                .orElseThrow(() -> new UserNotFoundException("User Not Found"));
+        return orderService.cancelOrder(cancelOrderRequest);
+    }
+
+    @Override
+    public CheckOutFoodResponse checkOutFood(CheckOutFoodRequest checkOutFoodRequest) {
+        User user = userRepository.findUserById(checkOutFoodRequest.getUserId())
+                .orElseThrow(() -> new UserNotFoundException("User Not Found"));
+        return cartItemService.checkOutFood(checkOutFoodRequest);
+    }
+
+    @Override
+    public AddCartItemsToACustomerCartResponse addCartItemsToACustomerCart(AddCartItemsToACustomerCartRequest addCartItemsToACustomerCart) {
+        return cartService.addCartItemsToACustomerCart(addCartItemsToACustomerCart);
+    }
+
+    @Override
+    public RemoveCartItemsToACustomerCartResponse removeCartItemsToACustomerCart(RemoveCartItemsToACustomerCartRequest removeCartItemsToACustomerCart) {
         return null;
     }
 
     @Override
-    public UserCanCancelOrderResponse cancelOrder(UserCanCancelOrderRequest cancelOrderRequest) {
+    public FindAllCartItemsInCartResponse findAllCartItemsInCart(FindAllCartItemsInCartRequest findAllCartItemsInCart) {
         return null;
     }
 
