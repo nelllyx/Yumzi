@@ -27,7 +27,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public MakeOrderResponse makeOrder(MakeOrderRequest request) {
-        Cart cart = cartRepository.findCartByUserId(request.getOrderId())
+        Cart cart = cartRepository.findCartByUserId(request.getUserId())
                 .orElseThrow(() -> new CartNotFoundException("Cart not found"));
         Order order = new Order();
         order.setUserName(request.getUserName());

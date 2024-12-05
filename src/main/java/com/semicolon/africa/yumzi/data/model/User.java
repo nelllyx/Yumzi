@@ -24,7 +24,4 @@ public class User {
     private String email;
     private String password;
     private String phoneNumber;
-    private String foodName;
-    private String foodDescription;
-    private int quantity;
 }

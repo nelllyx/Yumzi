@@ -8,8 +8,10 @@ import com.semicolon.africa.yumzi.dtos.response.AddCartItemsToACustomerCartRespo
 import com.semicolon.africa.yumzi.dtos.response.FindAllCartItemsInCartResponse;
 import com.semicolon.africa.yumzi.dtos.response.RemoveCartItemsToACustomerCartResponse;
 
+import java.util.List;
+
 public interface CartService {
     AddCartItemsToACustomerCartResponse addCartItemsToACustomerCart(AddCartItemsToACustomerCartRequest addCartItemsToACustomerCart);
     RemoveCartItemsToACustomerCartResponse removeCartItemsToACustomerCart(RemoveCartItemsToACustomerCartRequest removeCartItemsToACustomerCart);
-    FindAllCartItemsInCartResponse findAllCartItemsInCart(FindAllCartItemsInCartRequest findAllCartItemsInCart);
+    List<FindAllCartItemsInCartResponse> findAllCartItemsInCart(FindAllCartItemsInCartRequest findAllCartItemsInCart);
 }

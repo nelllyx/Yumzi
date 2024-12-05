@@ -7,6 +7,7 @@ import lombok.Setter;
 @Getter
 public class AddCartItemRequest {
     private Long userId;
+    private Long foodId;
     private String foodName;
     private String foodType;
     private int quantity;

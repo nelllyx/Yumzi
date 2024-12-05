@@ -33,33 +33,50 @@ public class CartServiceImpl implements CartService{
     @Override
     public AddCartItemsToACustomerCartResponse addCartItemsToACustomerCart(AddCartItemsToACustomerCartRequest addCartItemsToACustomerCart) {
         Cart cart = cartRepository.findCartByUserId(addCartItemsToACustomerCart.getCustomerId())
-                .orElseThrow(() -> new CartNotFoundException("Cart not found"));
-        CartItem cartItem = cartItemRepository.findCartItemById(addCartItemsToACustomerCart.getCartItemId())
-                        .orElseThrow(() -> new CartItemNotFoundException("CartItem Not Found"));
-        List<Cart> cartItems = new ArrayList<>();
-        if (cartItem.getFoodName().equals(addCartItemsToACustomerCart.getFoodName()) &&
-                cartItem.getFoodType().equals(addCartItemsToACustomerCart.getFoodType()) &&
-                cartItem.getQuantity() == addCartItemsToACustomerCart.getQuantity()) {
-            cart.setFoodName(addCartItemsToACustomerCart.getFoodName());
-            cart.setFoodType(addCartItemsToACustomerCart.getFoodType());
-            cart.setQuantity(addCartItemsToACustomerCart.getQuantity());
-            cartItems.add(cart);
-            cartRepository.saveAll(cartItems);
-            AddCartItemsToACustomerCartResponse response = new AddCartItemsToACustomerCartResponse();
-            response.setId(cart.getId());
-            response.setMessage("Cart Item Added Successfully In Cart");
-            return response;
-        }
-        throw new CartItemNotFoundException("Cart Item Not Found");
+                .orElseGet(() -> {
+                    Cart newCart = new Cart();
+                    newCart.setId(addCartItemsToACustomerCart.getCustomerId());
+                    return cartRepository.save(newCart);
+                });
+        List<CartItem> cartItem = cartItemRepository.findAllCartItemByUserId(addCartItemsToACustomerCart.getCustomerId());
+        List<CartItem> cartItems = cart.getItems();
+        cartItems.addAll(cartItem);
+        cart.setItems(cartItems);
+        cartRepository.save(cart);
+        AddCartItemsToACustomerCartResponse response = new AddCartItemsToACustomerCartResponse();
+        response.setId(cart.getId());
+        response.setMessage("Cart Item Added Successfully In Cart");
+        return response;
     }
 
     @Override
     public RemoveCartItemsToACustomerCartResponse removeCartItemsToACustomerCart(RemoveCartItemsToACustomerCartRequest removeCartItemsToACustomerCart) {
-        return null;
+        Cart cart = cartRepository.findCartByUserId(removeCartItemsToACustomerCart.getCustomerId())
+                .orElseThrow(() -> new CartNotFoundException("Cart Not Found"));
+        List<CartItem> cartItems = cart.getItems();
+        for (CartItem cartItem : cartItems) {
+            cartItems.remove(cartItem);
+        }
+        cart.setItems(cartItems);
+        cartRepository.save(cart);
+        RemoveCartItemsToACustomerCartResponse response = new RemoveCartItemsToACustomerCartResponse();
+        response.setMessage("Cart Item Removed Successfully In Cart");
+        return response;
     }
 
     @Override
-    public FindAllCartItemsInCartResponse findAllCartItemsInCart(FindAllCartItemsInCartRequest findAllCartItemsInCart) {
-        return null;
+    public List<FindAllCartItemsInCartResponse> findAllCartItemsInCart(FindAllCartItemsInCartRequest findAllCartItemsInCart) {
+        Cart cart = cartRepository.findCartByUserId(findAllCartItemsInCart.getUserId())
+                .orElseThrow(() -> new CartNotFoundException("Cart Not Found"));
+        List<CartItem> cartItemList = cart.getItems();
+        List<FindAllCartItemsInCartResponse> responseList = new ArrayList<>();
+        for (CartItem cartItem : cartItemList) {
+            FindAllCartItemsInCartResponse response = new FindAllCartItemsInCartResponse();
+            response.setFoodType(cartItem.getFoodType());
+            response.setQuantity(cartItem.getQuantity());
+            response.setFoodType(cartItem.getFoodType());
+            responseList.add(response);
+        }
+        return responseList;
     }
 }

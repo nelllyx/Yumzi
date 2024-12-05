@@ -3,8 +3,11 @@ package com.semicolon.africa.yumzi.data.repository;
 import com.semicolon.africa.yumzi.data.model.CartItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface CartItemRepository extends JpaRepository<CartItem, Long> {
-    Optional<CartItem> findCartItemById(Long cartId);
+    Optional<CartItem> findCartItemByUserId(Long userId);
+
+    List<CartItem> findAllCartItemByUserId(Long customerId);
 }

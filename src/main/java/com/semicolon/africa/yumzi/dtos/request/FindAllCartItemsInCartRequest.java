@@ -6,4 +6,5 @@ import lombok.Setter;
 @Setter
 @Getter
 public class FindAllCartItemsInCartRequest {
+    private Long userId;
 }

@@ -6,4 +6,5 @@ import lombok.Setter;
 @Setter
 @Getter
 public class RemoveCartItemsToACustomerCartRequest {
+    private Long customerId;
 }

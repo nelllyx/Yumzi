@@ -49,6 +49,8 @@ public class CartItemServiceImpl implements CartItemService{
         CartItem cartItem = new CartItem();
         User user = userRepository.findUserById(addCartItem.getUserId())
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
+        Food food = foodRepository.findFoodById(addCartItem.getFoodId())
+                        .orElseThrow(() -> new FoodNotFoundException("Food not found"));
         cartItem.setFoodName(addCartItem.getFoodName());
         cartItem.setQuantity(addCartItem.getQuantity());
         cartItem.setFoodType(addCartItem.getFoodType());

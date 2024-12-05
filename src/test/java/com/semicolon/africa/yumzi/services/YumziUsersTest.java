@@ -69,8 +69,7 @@ class YumziUsersTest {
     @Test
     public void testThatUserCanMakeOrder(){
         MakeOrderRequest makeOrderRequest = new MakeOrderRequest();
-        makeOrderRequest.setUserId(1L);
-        makeOrderRequest.setOrderId(4L);
+        makeOrderRequest.setUserId(3L);
         makeOrderRequest.setUserName("Ife");
         makeOrderRequest.setFoodName("Beans");
         makeOrderRequest.setAddress("Sabo");

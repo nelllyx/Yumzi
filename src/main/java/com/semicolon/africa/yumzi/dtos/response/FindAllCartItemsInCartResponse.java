@@ -6,4 +6,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class FindAllCartItemsInCartResponse {
+    private String foodName;
+    private String foodType;
+    private int quantity;
 }
