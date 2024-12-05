@@ -1,11 +1,17 @@
 package com.semicolon.africa.yumzi.services;
 
+import com.semicolon.africa.yumzi.data.model.Cart;
+import com.semicolon.africa.yumzi.data.model.Food;
 import com.semicolon.africa.yumzi.data.model.Order;
+import com.semicolon.africa.yumzi.data.repository.CartRepository;
+import com.semicolon.africa.yumzi.data.repository.FoodRepository;
 import com.semicolon.africa.yumzi.data.repository.OrderRepository;
 import com.semicolon.africa.yumzi.dtos.request.CancelOrderRequest;
 import com.semicolon.africa.yumzi.dtos.request.MakeOrderRequest;
 import com.semicolon.africa.yumzi.dtos.response.CancelOrderResponse;
 import com.semicolon.africa.yumzi.dtos.response.MakeOrderResponse;
+import com.semicolon.africa.yumzi.exceptions.CartNotFoundException;
+import com.semicolon.africa.yumzi.exceptions.FoodNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +19,18 @@ import org.springframework.stereotype.Service;
 public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private FoodRepository foodRepository;
+    @Autowired
+    private CartRepository cartRepository;
+
 
     @Override
     public MakeOrderResponse makeOrder(MakeOrderRequest request) {
+        Cart cart = cartRepository.findCartByUserId(request.getOrderId())
+                .orElseThrow(() -> new CartNotFoundException("Cart not found"));
         Order order = new Order();
+        order.setUserName(request.getUserName());
         order.setFoodName(request.getFoodName());
         order.setAddress(request.getAddress());
         order.setPhone(request.getPhone());

@@ -21,5 +21,4 @@ public class CustomerOrder {
     private String address;
     private String phone;
     private String foodName;
-    private BigDecimal amount;
 }

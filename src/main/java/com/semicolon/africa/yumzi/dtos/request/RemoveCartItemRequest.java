@@ -5,5 +5,5 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class UserCanCancelOrderRequest {
+public class RemoveCartItemRequest {
 }
