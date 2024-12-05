@@ -1,2 +1,6 @@
-package com.semicolon.africa.yumzi.data.model;public enum Pasta {
+package com.semicolon.africa.yumzi.data.model;
+
+public enum Pasta {
+    JOLLOFPASTA,
+    STIRFRY;
 }

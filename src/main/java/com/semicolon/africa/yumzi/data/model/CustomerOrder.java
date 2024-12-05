@@ -12,12 +12,12 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Setter
 @Getter
 @Entity
-@Table(name = "`order`")
-public class Order {
+//@Table(name = "`orders`")
+public class CustomerOrder {
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private String name;
     private Long id;
+    private String name;
     private String foodName;
     private String address;
     private String phone;

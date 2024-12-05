@@ -1,6 +1,6 @@
 package com.semicolon.africa.yumzi.services;
 
-import com.semicolon.africa.yumzi.data.model.Order;
+import com.semicolon.africa.yumzi.data.model.CustomerOrder;
 import com.semicolon.africa.yumzi.data.repository.OrderRepository;
 import com.semicolon.africa.yumzi.dtos.request.CancelOrderRequest;
 import com.semicolon.africa.yumzi.dtos.request.MakeOrderRequest;
@@ -16,7 +16,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public MakeOrderResponse makeOrder(MakeOrderRequest request) {
-        Order order = new Order();
+        CustomerOrder order = new CustomerOrder();
         order.setFoodName(request.getFoodName());
         order.setAddress(request.getAddress());
         order.setPhone(request.getPhone());
@@ -30,7 +30,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public CancelOrderResponse cancelOrder(CancelOrderRequest request) {
-        Order order = orderRepository.findOrderById(request.getOrderId())
+        CustomerOrder order = orderRepository.findOrderById(request.getOrderId())
                 .orElseThrow(() -> new RuntimeException("Order not found"));
         orderRepository.delete(order);
         CancelOrderResponse response = new CancelOrderResponse();
