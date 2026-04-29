@@ -51,14 +51,18 @@ public class CartItemServiceImpl implements CartItemService{
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
         Food food = foodRepository.findFoodById(addCartItem.getFoodId())
                         .orElseThrow(() -> new FoodNotFoundException("Food not found"));
-        cartItem.setFoodName(addCartItem.getFoodName());
-        cartItem.setQuantity(addCartItem.getQuantity());
-        cartItem.setFoodType(addCartItem.getFoodType());
-        cartItemRepository.save(cartItem);
-        AddCartItemResponse response = new AddCartItemResponse();
-        response.setId(cartItem.getId());
-        response.setMessage("Cart item added successfully");
-        return response;
+        if(user.getId().equals(addCartItem.getUserId())){
+            cartItem.setUserId(addCartItem.getUserId());
+            cartItem.setFoodName(addCartItem.getFoodName());
+            cartItem.setQuantity(addCartItem.getQuantity());
+            cartItem.setFoodType(addCartItem.getFoodType());
+            cartItemRepository.save(cartItem);
+            AddCartItemResponse response = new AddCartItemResponse();
+            response.setId(cartItem.getId());
+            response.setMessage("Cart item added successfully");
+            return response;
+        }
+        throw new UserNotFoundException("User not found");
     }
 
     @Override

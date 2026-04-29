@@ -1,7 +1,9 @@
 package com.semicolon.africa.yumzi.controllers;
 
+import com.semicolon.africa.yumzi.dtos.request.LogInUserRequest;
 import com.semicolon.africa.yumzi.dtos.request.RegisterUserRequest;
 import com.semicolon.africa.yumzi.dtos.response.ApiResponse;
+import com.semicolon.africa.yumzi.dtos.response.LogInUserResponse;
 import com.semicolon.africa.yumzi.dtos.response.RegisterUserResponse;
 import com.semicolon.africa.yumzi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,16 @@ public class YumziUsersController {
     public ResponseEntity<?> registerUser(@RequestBody RegisterUserRequest register) {
         try {
             RegisterUserResponse response = userService.registerUser(register);
+            return new ResponseEntity<>(new ApiResponse(response, true), HttpStatus.CREATED);
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(new ApiResponse(e.getMessage(), false), HttpStatus.BAD_REQUEST);
+        }
+    }
+    @PostMapping("login")
+    public ResponseEntity<?> logInUser(@RequestBody LogInUserRequest logInUser) {
+        try{
+            LogInUserResponse response = userService.logInUser(logInUser);
             return new ResponseEntity<>(new ApiResponse(response, true), HttpStatus.CREATED);
         }
         catch (Exception e) {

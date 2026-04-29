@@ -24,10 +24,10 @@ class YumziUsersTest {
     @Test
     public void testThatUserCanRegister() {
         RegisterUserRequest registerUserRequest = new RegisterUserRequest();
-        registerUserRequest.setName("Olakunle");
-        registerUserRequest.setPassword("kunle1");
-        registerUserRequest.setEmail("Olakunle@gmail.com");
-        registerUserRequest.setPhoneNumber("08146998031");
+        registerUserRequest.setName("Lovey");
+        registerUserRequest.setPassword("000000");
+        registerUserRequest.setEmail("Lovey@gmail.com");
+        registerUserRequest.setPhoneNumber("07987654321");
         RegisterUserResponse registerUserResponse = userService.registerUser(registerUserRequest);
         assertThat(registerUserResponse.getMessage()).isEqualTo("Registration Successful");
     }
@@ -69,7 +69,7 @@ class YumziUsersTest {
     @Test
     public void testThatUserCanMakeOrder(){
         MakeOrderRequest makeOrderRequest = new MakeOrderRequest();
-        makeOrderRequest.setUserId(3L);
+        makeOrderRequest.setUserId(1L);
         makeOrderRequest.setUserName("Ife");
         makeOrderRequest.setFoodName("Beans");
         makeOrderRequest.setAddress("Sabo");

@@ -30,6 +30,10 @@ public class YumziUsers implements UserService{
         validatePhonenumber(register.getPhoneNumber());
         validatePhonenumberValue(register.getPhoneNumber());
         User user = new User();
+        if(register.getEmail().isEmpty() || register.getPassword().isEmpty() ||
+                register.getPhoneNumber().isEmpty() || register.getName().isEmpty()) {
+            throw new IncompleteRequestException("Incomplete Request");
+        }
         user.setName(register.getName());
         user.setEmail(register.getEmail());
         user.setPassword(register.getPassword());

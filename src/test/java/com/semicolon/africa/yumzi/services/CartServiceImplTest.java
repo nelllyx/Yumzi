@@ -25,21 +25,21 @@ public class CartServiceImplTest {
     @Test
     public void testThatCartItemsCanBeAddedToTheCart() {
         AddCartItemsToACustomerCartRequest request = new AddCartItemsToACustomerCartRequest();
-        request.setCustomerId(3L);
+        request.setCustomerId(1L);
         AddCartItemsToACustomerCartResponse response = cartService.addCartItemsToACustomerCart(request);
         assertThat(response.getMessage()).isEqualTo("Cart Item Added Successfully In Cart");
     }
     @Test
     public void testThatCartItemCanBeDeletedFromCart(){
         RemoveCartItemsToACustomerCartRequest request = new RemoveCartItemsToACustomerCartRequest();
-        request.setCustomerId(3L);
+        request.setCustomerId(1L);
         RemoveCartItemsToACustomerCartResponse response = cartService.removeCartItemsToACustomerCart(request);
         assertThat(response.getMessage()).isEqualTo("Cart Item Removed Successfully In Cart");
     }
     @Test
     public void testThatAllCartItemsCanBeFoundToTheCart() {
         FindAllCartItemsInCartRequest findAllCartItemsInCartRequest = new FindAllCartItemsInCartRequest();
-        findAllCartItemsInCartRequest.setUserId(3L);
+        findAllCartItemsInCartRequest.setUserId(1L);
         List<FindAllCartItemsInCartResponse> findAllCartItemsInCartResponse = cartService.findAllCartItemsInCart(findAllCartItemsInCartRequest);
         assertNotNull(findAllCartItemsInCartResponse);
     }
